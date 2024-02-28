@@ -100,5 +100,5 @@ sudo systemctl enable $BINARY_NAME
 sudo systemctl restart $BINARY_NAME
 
 
-echo "\n =============== SETUP FINISHED =================== \n"
+echo -e "=============== SETUP FINISHED ==================="
 echo -e "Check logs:            ${CYAN}sudo journalctl -u $BINARY_NAME -f -o cat ${NC}"
