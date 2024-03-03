@@ -1,8 +1,11 @@
 #!/bin/bash
 
 AUT_VERSION="0.13.0"
+ORACLE_VERSION="0.1.6"
+
 NETWORK_NAME="bakerloo"
 BINARY_NAME="autonityd"
+KEYSTORE_DIR="$HOME/bakerloo-keystore"
 DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 STATIC_NODE_URL="https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/static-nodes.json"
 
@@ -44,9 +47,9 @@ fi
 pipx install --force https://github.com/autonity/aut/releases/download/v0.4.0.dev0/aut-0.4.0.dev0-py3-none-any.whl
 pipx ensurepath
 source $HOME/.bashrc
-mkdir bakerloo-keystore
+mkdir $KEYSTORE_DIR
 
-create_account "./bakerloo-keystore/wallet.key" "$WALLET_PASSWORD"
+create_account "$KEYSTORE_DIR/wallet.key" "$WALLET_PASSWORD"
 
 sudo tee .autrc > /dev/null << EOF
 [aut]
@@ -95,10 +98,46 @@ EOF
 
 curl -o "$DATA_DIR/static-nodes.json" $STATIC_NODE_URL
 
+sleep 1
+echo -e "=============== Install Oracle ==================="
+
+cd  $HOME
+wget https://github.com/autonity/autonity-oracle/releases/download/v$ORACLE_VERSION/autonity-oracle.tgz
+tar -xzf autonity-oracle.tgz
+rm -rf autonity-oracle.tgz
+
+cd autonity-oracle && sudo cp -r autoracle /usr/local/bin/autoracle && cd $HOME
+autoracle version
+
+
+sudo tee /etc/systemd/system/autoracled.service > /dev/null << EOF
+[Unit]
+Description=Autoracled Node
+After=network-online.target
+StartLimitIntervalSec=0
+[Service]
+User=$USER
+Restart=always
+RestartSec=3
+LimitNOFILE=65535
+ExecStart=autoracle \
+    -key.file="${KEYSTORE_DIR}/wallet.key" \
+    -key.password="${WALLET_PASSWORD}" \
+    -ws="ws://127.0.0.1:8546" \
+    -plugin.conf="${HOME}/autonity-oracle/plugins-conf.yml" \
+    -plugin.dir="${HOME}/autonity-oracle/plugins/" \
+  
+[Install]
+WantedBy=multi-user.target
+EOF
+
 sudo systemctl daemon-reload 
+
 sudo systemctl enable $BINARY_NAME 
 sudo systemctl restart $BINARY_NAME
 
+sudo systemctl enable autoracled
+sudo systemctl restart autoracled
 
 echo -e "=============== SETUP FINISHED ==================="
 echo -e "Check logs:            ${CYAN}sudo journalctl -u $BINARY_NAME -f -o cat ${NC}"
