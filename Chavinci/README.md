@@ -5,6 +5,10 @@
 
 Link dev: https://docs.cha.network/developer/node/manually-setup/
 
+# Utilities
+
+Open port 22833
+
 Check sync:
 
     cd $HOME/chavinci && ./cha-cli getblockchaininfo
