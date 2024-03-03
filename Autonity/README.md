@@ -15,10 +15,16 @@ Edit API key on file plugins-conf.yml
 
     vi ${HOME}/autonity-oracle/plugins-conf.yml
 
-After edit done, save file and restart oracle service:
+After edit done, save file and restart oracle service
 
     sudo systemctl restart autoracled
 
 # Create Autonity validator
 
 Follow this link: https://docs.autonity.org/validators/register-vali/
+
+# Check logs
+
+    journalctl -u autonityd -f -o cat
+
+    journalctl -u autoracled -f -o cat
