@@ -5,8 +5,8 @@ read -r -p "Enter RPC password: " NODE_PASSWORD
 
 mkdir $HOME/chavinci && cd $HOME/chavinci
 wget https://github.com/chavinci-chain/chavinci-releases/releases/download/1.0.3/chavinci-linux.zip && unzip chavinci-linux.zip
-rm -rf ~/.chachain
-mkdir ~/.chachain && cd .chachain
+rm -rf $HOME/.chachain
+mkdir $HOME/.chachain && cd $HOME/.chachain
 
 tee chachain.conf > /dev/null << EOF
 rpcuser=${NODE_NAME}
