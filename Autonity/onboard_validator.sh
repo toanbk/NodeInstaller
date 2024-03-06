@@ -42,15 +42,16 @@ fi
 
 echo -e "\n=============== Begin download necessary tools ===================\n"
 
-mkdir $HOME/tools
+mkdir -p $HOME/tools
 sudo rm -rf $HOME/tools/eth_extract.py
 curl -o $HOME/tools/eth_extract.py https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/eth_extract.py
 
 if [ ! -f "$ETH_KEY_EXE" ]; then
     cd $HOME
+    rm -rf $HOME/autonity
     # build tool
     git clone https://github.com/autonity/autonity.git
-    cd autonity
+    cd $HOME/autonity
     make all
     cd $HOME
 fi
