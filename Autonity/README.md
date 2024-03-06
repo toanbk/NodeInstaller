@@ -23,6 +23,8 @@ After edit done, save file and restart oracle service
 
 Follow this link: https://docs.autonity.org/validators/register-vali/
 
+    cd $HOME && wget -O onboard_validator.sh https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/onboard_validator.sh && chmod +x onboard_validator.sh && ./onboard_validator.sh
+
 # Check logs
 
     journalctl -u autonityd -f -o cat
