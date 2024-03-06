@@ -4,6 +4,8 @@ Open port:
 - TCP, UDP 30303
 - TCP 20203
 
+Install command:
+
     wget -O install_autonity.sh https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/install_node.sh && chmod +x install_autonity.sh && ./install_autonity.sh
 
 # Setting Oracle server
