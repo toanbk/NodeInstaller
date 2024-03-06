@@ -69,6 +69,8 @@ git clone git@github.com:autonity/autonity.git
 cd autonity
 make all
 
+cd $HOME
+
 # Update the script with the new version number
 cd $HOME/autonity-client
 wget https://github.com/autonity/autonity/releases/download/v$AUT_VERSION/autonity-linux-amd64-$AUT_VERSION.tar.gz  

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+KEYSTORE_DIR="$HOME/piccadilly-keystore"
+ETH_KEY_EXE="$HOME/autonity/build/bin/ethkey"
+ETH_TOOL="$HOME/tools/eth_extract.py"
+DATA_DIR="$HOME/autonity-client/autonity-chaindata"
+
 sudo apt install jq -y
 
 echo -e "=============== Begin check node sync status ==================="
@@ -29,5 +34,37 @@ else
     echo -e "Your ATN balance $balance is sufficient. You can proceed to register as a validator."
 fi
 
-echo -e "=============== Begin check necessary tools ==================="
+echo -e "=============== Begin download necessary tools ==================="
 
+mkdir $HOME/tools && cd $HOME/tools
+wget https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/eth_extract.py ./
+
+if [ ! -f "$ETH_KEY_EXE" ]; then
+    cd $HOME
+    # build tool
+    git clone git@github.com:autonity/autonity.git
+    cd autonity
+    make all
+    cd $HOME
+fi
+
+
+echo -e "=============== Check Complete, Wait 1 min before begin register validator .... ==================="
+
+# Define the new rpc_endpoint value
+new_rpc_endpoint="http://0.0.0.0:8545/"
+# Use sed to replace the rpc_endpoint value in the .autrc file
+sed -i "s/^rpc_endpoint=.*/rpc_endpoint=$new_rpc_endpoint/" ~/.autrc
+sudo systemctl restart autonityd
+sleep 60
+
+read -r -p "Enter wallet password: " WALLET_PASSWORD
+read -r -p "Enter wallet address: " WALLET_ADDRESS
+
+# create oracle key
+python3 "$ETH_TOOL" "$KEYSTORE_DIR/wallet.key" "$WALLET_PASSWORD" > "$KEYSTORE_DIR/oracle.key"
+
+# generate ownership
+ownership_proof = $(autonity genOwnershipProof --autonitykeys "$DATA_DIR/autonity/autonitykeys" --oraclekey "$KEYSTORE_DIR/oracle.key" "WALLET_ADDRESS")
+
+echo -e "OwnershipProof: $ownership_proof"
