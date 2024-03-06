@@ -3,9 +3,9 @@
 AUT_VERSION="0.13.0"
 ORACLE_VERSION="0.1.6"
 
-NETWORK_NAME="bakerloo"
+NETWORK_NAME="piccadilly"
 BINARY_NAME="autonityd"
-KEYSTORE_DIR="$HOME/bakerloo-keystore"
+KEYSTORE_DIR="$HOME/piccadilly-keystore"
 DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 STATIC_NODE_URL="https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/static-nodes.json"
 
@@ -35,8 +35,10 @@ read -r -p "Enter new wallet password: " WALLET_PASSWORD
 echo -e "\e[1m\e[32m1. Updating packages and dependencies--> \e[0m" && sleep 1
 
 sudo apt update && apt upgrade -y
-sudo apt install git curl wget -y && git config --global core.editor "vim" && sudo apt install make clang pkg-config libssl-dev build-essential -y 
+sudo apt install git curl wget -y && git config --global core.editor "vim" && sudo apt install make clang pkg-config libssl-dev build-essential jq -y 
 sudo apt install pipx -y
+sudo apt install python3-pip -y
+pip install eth-account
 
 # Check if expect is installed, if not, install it
 if ! command -v expect &>/dev/null; then
@@ -53,18 +55,23 @@ create_account "$KEYSTORE_DIR/wallet.key" "$WALLET_PASSWORD"
 
 sudo tee .autrc > /dev/null << EOF
 [aut]
-rpc_endpoint=https://rpc1.bakerloo.autonity.org/
-keyfile=./bakerloo-keystore/wallet.key
+rpc_endpoint=https://rpc1.piccadilly.autonity.org/
+keyfile=./piccadilly-keystore/wallet.key
 EOF
 
 echo -e "\e[1m\e[32m3. Downloading and building binaries--> \e[0m" && sleep 1
 
 cd $HOME
+# build tool
+git clone git@github.com:autonity/autonity.git
+cd autonity
+make all
+
 # Update the script with the new version number
 cd $HOME/autonity-client
 wget https://github.com/autonity/autonity/releases/download/v$AUT_VERSION/autonity-linux-amd64-$AUT_VERSION.tar.gz  
 sudo tar -xzf autonity-linux-amd64-$AUT_VERSION.tar.gz && sudo rm -rf autonity-linux-amd64-$AUT_VERSION.tar.gz  
-sudo cp -rf autonity /usr/local/bin/autonity && sudo chmod +x /usr/local/bin/autonity
+sudo mv autonity /usr/local/bin/ && sudo chmod +x /usr/local/bin/autonity
 
 cd $HOME
 
