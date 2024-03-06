@@ -6,6 +6,7 @@ ORACLE_VERSION="0.1.6"
 NETWORK_NAME="piccadilly"
 BINARY_NAME="autonityd"
 KEYSTORE_DIR="$HOME/piccadilly-keystore"
+ETH_KEY_EXE="$HOME/autonity/build/bin/ethkey"
 DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 STATIC_NODE_URL="https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/static-nodes.json"
 
@@ -63,11 +64,14 @@ EOF
 
 echo -e "\e[1m\e[32m3. Downloading and building binaries--> \e[0m" && sleep 1
 
-cd $HOME
-# build tool
-git clone git@github.com:autonity/autonity.git
-cd autonity
-make all
+if [ ! -f "$ETH_KEY_EXE" ]; then
+    cd $HOME
+    # build tool
+    git clone git@github.com:autonity/autonity.git
+    cd autonity
+    make all
+    cd $HOME
+fi
 
 cd $HOME
 

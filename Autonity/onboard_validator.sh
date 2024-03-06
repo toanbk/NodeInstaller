@@ -48,7 +48,6 @@ if [ ! -f "$ETH_KEY_EXE" ]; then
     cd $HOME
 fi
 
-
 echo -e "=============== Check Complete, Wait 1 min before begin register validator .... ==================="
 
 # Define the new rpc_endpoint value
