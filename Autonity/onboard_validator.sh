@@ -6,7 +6,6 @@ ETH_TOOL="$HOME/tools/eth_extract.py"
 DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 
 read -r -p "Enter wallet password: " WALLET_PASSWORD
-read -r -p "Enter wallet address: " WALLET_ADDRESS
 
 sudo apt install jq -y
 
@@ -61,6 +60,10 @@ sed -i "s#^rpc_endpoint=.*#rpc_endpoint=$new_rpc_endpoint#" ~/.autrc
 sudo systemctl restart autonityd.service
 sleep 60
 
+# get wallet address
+WALLET_ADDRESS=$(aut account info | jq -r '.[0].account')
+
+echo -e "=============== Step 1. Generate a cryptographic proof of node ownership ==============="
 # create oracle key
 echo -e "python3 $ETH_TOOL $KEYSTORE_DIR/wallet.key $WALLET_PASSWORD > $KEYSTORE_DIR/oracle.key"
 
@@ -71,4 +74,37 @@ echo "autonity genOwnershipProof --autonitykeys $DATA_DIR/autonity/autonitykeys 
 # generate ownership
 ownership_proof=$(autonity genOwnershipProof --autonitykeys "$DATA_DIR/autonity/autonitykeys" --oraclekey "$KEYSTORE_DIR/oracle.key" "$WALLET_ADDRESS")
 
-echo -e "OwnershipProof: $ownership_proof"
+echo -e "=============== genOwnershipProof ==================="
+echo -e ''
+echo -e "$ownership_proof"
+echo -e ''
+echo -e "=================================="
+
+sleep 1
+
+echo -e "=============== Step 2. Determine the validator enode and address ==============="
+
+admin_enode=$(aut node info | jq -r '.admin_enode')
+
+echo -e "=============== Admin Enode ==================="
+echo -e ''
+echo -e "$admin_enode"
+echo -e ''
+echo -e "==============================================="
+
+validator_address=$(aut validator compute-address $admin_enode)
+
+echo -e "=============== Validator Address ==================="
+echo -e ''
+echo -e "$validator_address"
+echo -e ''
+echo -e "====================================================="
+
+sleep 1
+
+echo -e "=============== Step 3. Determine the validator consensus public key ==============="
+
+consensus_key=$(./"$ETH_KEY_EXE" autinspect "$DATA_DIR/autonity/autonitykeys" | awk '/Consensus Public Key:/ {print $4}')
+
+echo -e "Comand: ./"$ETH_KEY_EXE" autinspect "$DATA_DIR/autonity/autonitykeys"
+
