@@ -35,7 +35,9 @@ read -r -p "Enter new wallet password: " WALLET_PASSWORD
 echo -e "\e[1m\e[32m1. Updating packages and dependencies--> \e[0m" && sleep 1
 
 sudo apt update && apt upgrade -y
-sudo apt install git curl wget -y && git config --global core.editor "vim" && sudo apt install make clang pkg-config libssl-dev build-essential jq -y 
+sudo apt install git curl wget -y && git config --global core.editor "vim" && sudo apt install make clang pkg-config libssl-dev build-essential -y 
+sudo apt install tar wget clang pkg-config libssl-dev libleveldb-dev jq bsdmainutils git make ncdu htop lz4 screen bc fail2ban -y
+
 sudo apt install pipx -y
 sudo apt install python3-pip -y
 pip install eth-account

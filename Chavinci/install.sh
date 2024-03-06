@@ -1,5 +1,10 @@
 #!/bin/bash
 
+sudo apt update && apt upgrade -y
+sudo apt install git curl wget -y && git config --global core.editor "vim" && sudo apt install zip unzip make clang pkg-config libssl-dev build-essential -y 
+sudo apt install tar wget clang pkg-config libssl-dev libleveldb-dev jq bsdmainutils git make ncdu htop lz4 screen bc fail2ban -y
+
+
 read -r -p "Enter RPC username: " NODE_NAME
 read -r -p "Enter RPC password: " NODE_PASSWORD
 
