@@ -38,9 +38,9 @@ fi
 
 echo -e "=============== Begin download necessary tools ==================="
 
-mkdir $HOME/tools && cd $HOME/tools
-sudo rm -rf eth_extract.py
-wget https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/eth_extract.py
+mkdir $HOME/tools
+sudo rm -rf $HOME/tools/eth_extract.py
+curl -o $HOME/tools/eth_extract.py https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/eth_extract.py
 
 if [ ! -f "$ETH_KEY_EXE" ]; then
     cd $HOME
