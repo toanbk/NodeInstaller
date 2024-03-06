@@ -7,7 +7,11 @@ DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 
 read -r -p "Enter wallet password: " WALLET_PASSWORD
 
+echo -e "\n=============== Begin install package ===================\n"
+
 sudo apt install jq -y
+sudo apt install python3-pip -y
+pip install eth-account
 
 echo -e "\n=============== Begin check node sync status ===================\n"
 

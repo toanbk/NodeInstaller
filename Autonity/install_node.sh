@@ -6,7 +6,6 @@ ORACLE_VERSION="0.1.6"
 NETWORK_NAME="piccadilly"
 BINARY_NAME="autonityd"
 KEYSTORE_DIR="$HOME/piccadilly-keystore"
-ETH_KEY_EXE="$HOME/autonity/build/bin/ethkey"
 DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 STATIC_NODE_URL="https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/static-nodes.json"
 
@@ -40,8 +39,6 @@ sudo apt install git curl wget -y && git config --global core.editor "vim" && su
 sudo apt install tar wget clang pkg-config libssl-dev libleveldb-dev jq bsdmainutils git make ncdu htop lz4 screen bc fail2ban -y
 
 sudo apt install pipx -y
-sudo apt install python3-pip -y
-pip install eth-account
 
 # Check if expect is installed, if not, install it
 if ! command -v expect &>/dev/null; then
@@ -64,20 +61,8 @@ EOF
 
 echo -e "\e[1m\e[32m3. Downloading and building binaries--> \e[0m" && sleep 1
 
-if [ ! -f "$ETH_KEY_EXE" ]; then
-    cd $HOME
-    # build tool
-    git clone git@github.com:autonity/autonity.git
-    cd autonity
-    make all
-    cd $HOME
-fi
-
-cd $HOME
-
 # Update the script with the new version number
-cd $HOME/autonity-client
-wget https://github.com/autonity/autonity/releases/download/v$AUT_VERSION/autonity-linux-amd64-$AUT_VERSION.tar.gz  
+cd $HOME/autonity-client && wget https://github.com/autonity/autonity/releases/download/v$AUT_VERSION/autonity-linux-amd64-$AUT_VERSION.tar.gz  
 sudo tar -xzf autonity-linux-amd64-$AUT_VERSION.tar.gz && sudo rm -rf autonity-linux-amd64-$AUT_VERSION.tar.gz  
 sudo mv autonity /usr/local/bin/ && sudo chmod +x /usr/local/bin/autonity
 
