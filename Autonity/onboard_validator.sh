@@ -49,7 +49,7 @@ curl -o $HOME/tools/eth_extract.py https://raw.githubusercontent.com/toanbk/Node
 if [ ! -f "$ETH_KEY_EXE" ]; then
     cd $HOME
     # build tool
-    git clone git@github.com:autonity/autonity.git
+    git clone https://github.com/autonity/autonity.git
     cd autonity
     make all
     cd $HOME
