@@ -5,6 +5,9 @@ ETH_KEY_EXE="$HOME/autonity/build/bin/ethkey"
 ETH_TOOL="$HOME/tools/eth_extract.py"
 DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 
+read -r -p "Enter wallet password: " WALLET_PASSWORD
+read -r -p "Enter wallet address: " WALLET_ADDRESS
+
 sudo apt install jq -y
 
 echo -e "=============== Begin check node sync status ==================="
@@ -37,7 +40,8 @@ fi
 echo -e "=============== Begin download necessary tools ==================="
 
 mkdir $HOME/tools && cd $HOME/tools
-wget https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/eth_extract.py ./
+sudo rm -rf eth_extract.py
+wget https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/eth_extract.py
 
 if [ ! -f "$ETH_KEY_EXE" ]; then
     cd $HOME
@@ -53,17 +57,18 @@ echo -e "=============== Check Complete, Wait 1 min before begin register valida
 # Define the new rpc_endpoint value
 new_rpc_endpoint="http://0.0.0.0:8545/"
 # Use sed to replace the rpc_endpoint value in the .autrc file
-sed -i "s/^rpc_endpoint=.*/rpc_endpoint=$new_rpc_endpoint/" ~/.autrc
-sudo systemctl restart autonityd
+sed -i "s#^rpc_endpoint=.*#rpc_endpoint=$new_rpc_endpoint#" ~/.autrc
+sudo systemctl restart autonityd.service
 sleep 60
 
-read -r -p "Enter wallet password: " WALLET_PASSWORD
-read -r -p "Enter wallet address: " WALLET_ADDRESS
-
 # create oracle key
+echo -e "python3 $ETH_TOOL $KEYSTORE_DIR/wallet.key $WALLET_PASSWORD > $KEYSTORE_DIR/oracle.key"
+
 python3 "$ETH_TOOL" "$KEYSTORE_DIR/wallet.key" "$WALLET_PASSWORD" > "$KEYSTORE_DIR/oracle.key"
 
+echo "autonity genOwnershipProof --autonitykeys $DATA_DIR/autonity/autonitykeys --oraclekey $KEYSTORE_DIR/oracle.key $WALLET_ADDRESS"
+
 # generate ownership
-ownership_proof = $(autonity genOwnershipProof --autonitykeys "$DATA_DIR/autonity/autonitykeys" --oraclekey "$KEYSTORE_DIR/oracle.key" "WALLET_ADDRESS")
+ownership_proof=$(autonity genOwnershipProof --autonitykeys "$DATA_DIR/autonity/autonitykeys" --oraclekey "$KEYSTORE_DIR/oracle.key" "$WALLET_ADDRESS")
 
 echo -e "OwnershipProof: $ownership_proof"

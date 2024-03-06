@@ -19,6 +19,10 @@ def main():
 
     try:
         private_key = extract_private_key(keystore_path, password)
+        if private_key.startswith('0x'):
+            # Remove '0x' prefix
+            private_key = private_key[2:]
+            
         print(private_key)
     except Exception as e:
         print("An error occurred:", e)
