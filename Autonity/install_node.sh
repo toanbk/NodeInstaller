@@ -62,7 +62,7 @@ EOF
 echo -e "\e[1m\e[32m3. Downloading and building binaries--> \e[0m" && sleep 1
 
 # Update the script with the new version number
-cd $HOME/autonity-client && wget https://github.com/autonity/autonity/releases/download/v$AUT_VERSION/autonity-linux-amd64-$AUT_VERSION.tar.gz  
+cd $HOME/autonity-client && sudo wget https://github.com/autonity/autonity/releases/download/v$AUT_VERSION/autonity-linux-amd64-$AUT_VERSION.tar.gz  
 sudo tar -xzf autonity-linux-amd64-$AUT_VERSION.tar.gz && sudo rm -rf autonity-linux-amd64-$AUT_VERSION.tar.gz  
 sudo mv autonity /usr/local/bin/ && sudo chmod +x /usr/local/bin/autonity
 
@@ -102,13 +102,12 @@ sleep 1
 echo -e "=============== Install Oracle ==================="
 
 cd  $HOME
-wget https://github.com/autonity/autonity-oracle/releases/download/v$ORACLE_VERSION/autonity-oracle.tgz
-tar -xzf autonity-oracle.tgz
-rm -rf autonity-oracle.tgz
+sudo wget https://github.com/autonity/autonity-oracle/releases/download/v$ORACLE_VERSION/autonity-oracle.tgz
+sudo tar -xzf autonity-oracle.tgz
+sudo rm -rf autonity-oracle.tgz
 
 cd autonity-oracle && sudo cp -r autoracle /usr/local/bin/autoracle && cd $HOME
 autoracle version
-
 
 sudo tee /etc/systemd/system/autoracled.service > /dev/null << EOF
 [Unit]
