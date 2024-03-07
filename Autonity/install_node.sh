@@ -46,7 +46,7 @@ if ! command -v expect &>/dev/null; then
     install_expect
 fi
 
-pipx install git+https://github.com/autonity/aut.git
+pipx install --force git+https://github.com/autonity/aut.git
 pipx ensurepath
 source $HOME/.bashrc
 mkdir $KEYSTORE_DIR
