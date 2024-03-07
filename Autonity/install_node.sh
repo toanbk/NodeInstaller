@@ -46,7 +46,7 @@ if ! command -v expect &>/dev/null; then
     install_expect
 fi
 
-pipx install --force https://github.com/autonity/aut/releases/download/v0.4.0.dev0/aut-0.4.0.dev0-py3-none-any.whl
+pipx install git+https://github.com/autonity/aut.git
 pipx ensurepath
 source $HOME/.bashrc
 mkdir $KEYSTORE_DIR
