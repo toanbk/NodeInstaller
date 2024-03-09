@@ -14,7 +14,7 @@ KEYSTORE_DIR="$HOME/piccadilly-keystore"
 DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 MSG="validator onboarded"
 
-echo -e "\n======== Begin get SIGNATURE OF MESSAGE VALIDATOR ONBOARDED ... ========\n"
+echo -e "\n ----- Begin get SIGNATURE OF MESSAGE VALIDATOR ONBOARDED...\n"
 sleep 1
 
 read -r -p "Enter wallet password: " WALLET_PASSWORD
