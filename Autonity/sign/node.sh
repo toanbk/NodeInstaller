@@ -15,8 +15,15 @@ fi
 KEYSTORE_DIR="$HOME/piccadilly-keystore"
 DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 
+
 echo -e "\n ----- Begin get SIGNATURE OF MESSAGE...\n"
-sleep 1
+
+# Define the new rpc_endpoint value
+new_rpc_endpoint="http://0.0.0.0:8545/"
+# Use sed to replace the rpc_endpoint value in the .autrc file
+sed -i "s#^rpc_endpoint=.*#rpc_endpoint=$new_rpc_endpoint#" ~/.autrc
+sudo systemctl restart autonityd.service
+sleep 30
 
 # Prompt the user to choose an option
 echo "Choose an option:"
