@@ -40,3 +40,7 @@ Follow this link: https://docs.autonity.org/validators/register-vali/
     journalctl -u autonityd -f -o cat
 
     journalctl -u autoracled -f -o cat
+
+# Tool sign message when on board validator
+
+    cd $HOME && wget -O sign_onboard.sh https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Autonity/sign/validator.sh && chmod +x sign_onboard.sh && ./sign_onboard.sh
