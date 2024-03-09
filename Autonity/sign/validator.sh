@@ -14,6 +14,9 @@ KEYSTORE_DIR="$HOME/piccadilly-keystore"
 DATA_DIR="$HOME/autonity-client/autonity-chaindata"
 MSG="validator onboarded"
 
+echo -e "\n======== Begin get SIGNATURE OF MESSAGE VALIDATOR ONBOARDED ... ========\n"
+sleep 1
+
 read -r -p "Enter wallet password: " WALLET_PASSWORD
 
 sudo rm -rf $KEYSTORE_DIR/node.priv $KEYSTORE_DIR/node.key
@@ -30,7 +33,9 @@ send "$WALLET_PASSWORD\r"
 expect eof
 EOF
 
-signature_message=$(aut account sign-message -p $WALLET_PASSWORD -k "$KEYSTORE_DIR/node.key" $MSG)
+echo -e "\n\nSign command: aut account sign-message -p $WALLET_PASSWORD -k $KEYSTORE_DIR/node.key \"$MSG\""
+
+signature_message=$(aut account sign-message -p $WALLET_PASSWORD -k "$KEYSTORE_DIR/node.key" "$MSG")
 
 admin_enode=$(aut node info | jq -r '.admin_enode')
 
