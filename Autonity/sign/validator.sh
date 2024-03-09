@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt install jq -y
+
 install_expect() {
     sudo apt install -y expect
 }
