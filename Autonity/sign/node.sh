@@ -64,4 +64,12 @@ echo -e "\n======== SIGNATURE OF MESSAGE VALIDATOR ONBOARDED ========\n"
 echo -e "\e[1m\e[32m$signature_message \e[0m"
 echo -e "\n==========================================================\n"
 
+if [[ $choice == 2 ]]; then
+    ip_address=$(curl ipv4.icanhazip.com)
+    rpc_url="http://$ip_address:8545"
+    echo -e "\n======== RPC Node endpoint ========\n"
+    echo -e "\e[1m\e[32m$rpc_url \e[0m"
+    echo -e "\n==========================================================\n"
+fi
+
 echo -e "\e[1m\e[32m GOOD LUCK ! \e[0m"
