@@ -33,7 +33,7 @@ echo -e "\n=============== Begin check wallet balance ===================\n"
 balance=$(aut account balance)
 
 # Check if the balance is less than 1
-if (( $(echo "$balance < 1" | bc -l) )); then
+if (( $(echo "$balance < 0.3" | bc -l) )); then
     echo -e "Your ATN balance is too low. Please faucet at least 1 ATN to register validator."
     exit 1
 else
