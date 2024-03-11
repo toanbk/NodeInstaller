@@ -150,7 +150,17 @@ echo -e "Waiting for register validator ..."
 sleep 10
 
 # update aut file
-echo "validator=$validator_address" >> ~/.autrc
+# Check if ~/.autrc exists
+if [ -f ~/.autrc ]; then
+    # Check if validator entry already exists
+    if grep -q "^validator=" ~/.autrc; then
+        # Update existing validator entry
+        sed -i "s/^validator=.*/validator=$validator_address/" ~/.autrc
+    else
+        # Add new validator entry
+        echo "validator=$validator_address" >> ~/.autrc
+    fi
+fi
 
 echo -e "\n=============== Step 5. Check result ===============\n"
 
