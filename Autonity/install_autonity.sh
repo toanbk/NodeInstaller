@@ -47,7 +47,12 @@ fi
 
 pipx install --force git+https://github.com/autonity/aut.git
 pipx ensurepath
-source $HOME/.bashrc
+
+if ! grep -qF 'export PATH="$PATH:/root/.local/bin"' ~/.bash_profile; then
+    echo 'export PATH="$PATH:/root/.local/bin"' >> ~/.bash_profile
+fi
+source ~/.bash_profile
+
 mkdir $KEYSTORE_DIR
 
 create_account "$KEYSTORE_DIR/wallet.key" "$WALLET_PASSWORD"
