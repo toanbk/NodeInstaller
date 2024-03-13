@@ -26,7 +26,9 @@ PID=$!
 sleep 10
 
 # Kill the titan-edge daemon
-kill -9 $PID
+kill $PID
+
+sleep 5
 
 sudo tee /etc/systemd/system/titand.service > /dev/null << EOF
 [Unit]
