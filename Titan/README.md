@@ -26,3 +26,7 @@ If it not running, restart by command:
 In case not see your node on board here: https://test1.titannet.io/newoverview/activationcodemanagement, need to bind identity code manual by command:
 
     titan-edge bind --hash=<identity code> https://api-test1.container1.titannet.io/api/v2/device/binding
+
+Check node status
+
+    titan-edge state
