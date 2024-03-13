@@ -30,3 +30,38 @@ In case not see your node on board here: https://test1.titannet.io/newoverview/a
 Check node status
 
     titan-edge state
+
+-----------------------------------------------------------
+
+# DEV guide manual
+
+Step 1：
+
+mac installation:
+
+    wget -c https://github.com/Titannet-dao/titan-node/releases/download/0.1.12/titan_v0.1.12_darwin_amd64.tar.gz -O- | sudo tar -xz -C /usr/local/bin --strip-components=1
+
+Linux installation:
+
+    wget -c https://github.com/Titannet-dao/titan-node/releases/download/0.1.12/titan_v0.1.12_linux_amd64.tar.gz -O- | sudo tar -xz -C /usr/local/bin --strip-components=1
+
+
+Step 2：run the node
+
+1. start the node 
+
+start for the first time：
+
+    ./titan-edge daemon start --init --url https://test-locator.titannet.io:5000/rpc/v0
+
+start since the second. time：
+
+    titan-edge daemon start
+
+2. connect the node
+
+titan-edge bind --hash=your-hash-here https://api-test1.container1.titannet.io/api/v2/device/binding
+
+3. stop the node
+
+    titan-edge daemon stop
