@@ -16,9 +16,11 @@ Go to: https://test1.titannet.io/newoverview/activationcodemanagement and click 
 # Issue + Fix
 
 Check status of node by command
+
     systemctl status titand
 
-If it not running, restart by:
+If it not running, restart by command:
+
     systemctl restart titand
 
 In case not see your node on board here: https://test1.titannet.io/newoverview/activationcodemanagement, need to bind identity code manual by command:
