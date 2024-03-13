@@ -18,6 +18,7 @@ sudo wget https://github.com/Titannet-dao/titan-node/releases/download/${VERSION
 sudo tar -xvzf titan_v${VERSION}_linux_amd64.tar.gz && rm -rf titan_v${VERSION}_linux_amd64.tar.gz
 sudo chmod +x titan_v${VERSION}_linux_amd64/*
 sudo cp -rf titan_v${VERSION}_linux_amd64/* /usr/local/bin/
+sudo rm -rf titan_v${VERSION}_linux_amd64
 
 sudo titan-edge daemon start --init --url "$RPC_URL" &
 PID=$!
