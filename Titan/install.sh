@@ -17,13 +17,16 @@ sudo apt install git curl wget -y && git config --global core.editor "vim" && su
 
 echo -e "\e[1m\e[32m2. Install Node --> \e[0m" && sleep 1
 
-sudo wget -c https://github.com/Titannet-dao/titan-node/releases/download/$VERSION/titan_v$VERSION_linux_amd64.tar.gz -O- | sudo tar -xz -C /usr/local/bin --strip-components=1
+sudo wget https://github.com/Titannet-dao/titan-node/releases/download/$VERSION/titan_v$VERSION_linux_amd64.tar.gz
+sudo tar -xvzf titan_v$VERSION_linux_amd64.tar.gz && rm -rf titan_v$VERSION_linux_amd64.tar.gz
+sudo chmod +x titan_v$VERSION_linux_amd64/*
+sudo cp -rf titan_v$VERSION_linux_amd64/* /usr/local/bin/
 
 sudo titan-edge daemon start --init --url $RPC_URL &
 PID=$!
 
-# Wait for 20 seconds
-sleep 20
+# Wait for 10 seconds
+sleep 10
 
 # Kill the titan-edge daemon
 kill -9 $PID
@@ -48,7 +51,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable $BINARY_NAME
 sudo systemctl restart $BINARY_NAME
 
-sleep 20
+sleep 10
 
 # connect the node
 titan-edge bind --hash=$ID_CODE $BINDING_URL
