@@ -51,9 +51,12 @@ sudo systemctl restart "$BINARY_NAME"
 sleep 10
 
 # connect the node
-titan-edge bind --hash="$ID_CODE" "$BINDING_URL" &
+# titan-edge bind --hash="$ID_CODE" "$BINDING_URL" &
 
-sleep 1
+bind_command="titan-edge bind --hash=$ID_CODE $BINDING_URL"
+
+echo -e "\n=============== PLEASE COPY AND RUN THIS COMMAND: ===================\n"
+echo -e "\e[1m\e[32m$bind_command \e[0m"
+echo -e "\n=====================================================\n"
 
 echo -e "\n=============== SETUP FINISHED ===================\n"
-echo -e "\nCheck logs:            ${CYAN}sudo journalctl -u $BINARY_NAME -f -o cat ${NC}"
