@@ -51,7 +51,7 @@ sudo systemctl restart "$BINARY_NAME"
 sleep 10
 
 # connect the node
-titan-edge bind --hash="$ID_CODE" "$BINDING_URL"
+titan-edge bind --hash="$ID_CODE" "$BINDING_URL" &
 
 sleep 1
 
