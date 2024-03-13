@@ -10,10 +10,7 @@ BINDING_URL="https://api-test1.container1.titannet.io/api/v2/device/binding"
 read -r -p "Enter identity code: " ID_CODE
 
 echo -e "\e[1m\e[32m1. Updating packages and dependencies--> \e[0m" && sleep 1
-
-sudo apt update && apt upgrade -y
-sudo apt install git curl wget -y && git config --global core.editor "vim" && sudo apt install make clang pkg-config libssl-dev build-essential -y
-
+sudo apt install git curl wget tar zip unzip -y
 
 echo -e "\e[1m\e[32m2. Install Node --> \e[0m" && sleep 1
 
@@ -54,7 +51,7 @@ sudo systemctl restart "$BINARY_NAME"
 sleep 10
 
 # connect the node
-titan-edge bind --hash="$ID_CODE" "$BINDING_URL" &
+titan-edge bind --hash="$ID_CODE" "$BINDING_URL"
 
 sleep 1
 
