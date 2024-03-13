@@ -54,7 +54,7 @@ Step 2：run the node
 
 start for the first time：
 
-    ./titan-edge daemon start --init --url https://test-locator.titannet.io:5000/rpc/v0
+    titan-edge daemon start --init --url https://test-locator.titannet.io:5000/rpc/v0
 
 start since the second. time：
 
