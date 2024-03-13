@@ -62,7 +62,7 @@ start since the second. time：
 
 2. connect the node
 
-titan-edge bind --hash=your-hash-here https://api-test1.container1.titannet.io/api/v2/device/binding
+    titan-edge bind --hash=your-hash-here https://api-test1.container1.titannet.io/api/v2/device/binding
 
 3. stop the node
 
