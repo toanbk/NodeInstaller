@@ -33,7 +33,9 @@ Check node status
 
 -----------------------------------------------------------
 
-# DEV guide manual
+# Guide dev, install manual
+
+If you don't want to run auto install, you can follow step by step:
 
 Step 1：
 
