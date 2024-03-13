@@ -20,14 +20,13 @@ sudo chmod +x titan_v${VERSION}_linux_amd64/*
 sudo cp -rf titan_v${VERSION}_linux_amd64/* /usr/local/bin/
 sudo rm -rf titan_v${VERSION}_linux_amd64
 
-sudo titan-edge daemon start --init --url "$RPC_URL" &
-PID=$!
+sudo titan-edge daemon start --init --url "$RPC_URL" > /dev/null 2>&1 &
 
 # Wait for 10 seconds
 sleep 10
 
 # Kill the titan-edge daemon
-kill $PID
+pkill -9 titan-edge
 
 sleep 5
 
