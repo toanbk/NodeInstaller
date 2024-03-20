@@ -67,3 +67,8 @@ start since the second. time：
 3. stop the node
 
     titan-edge daemon stop
+
+# Free space
+
+    cd $HOME && wget -O titan_free_space.sh https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Titan/free_space.sh && chmod +x titan_free_space.sh && ./titan_free_space.sh && echo '01 */12 * * * /bin/bash -l -c '/root/titan_free_space.sh' >> /var/log/titan.log 2>&1'
+
