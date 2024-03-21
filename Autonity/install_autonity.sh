@@ -72,7 +72,7 @@ sudo mv autonity /usr/local/bin/ && sudo chmod +x /usr/local/bin/autonity
 
 cd $HOME
 
-your_ip="$(curl ifconfig.me)"
+your_ip="$(curl eth0.me)"
 
 sudo tee /etc/systemd/system/autonityd.service > /dev/null << EOF
 [Unit]
