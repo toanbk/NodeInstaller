@@ -72,3 +72,7 @@ start since the second. time：
 
     cd $HOME && wget -O titan_free_space.sh https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Titan/free_space.sh && chmod +x titan_free_space.sh && ./titan_free_space.sh && CRON_JOB="01 */12 * * * /bin/bash -l -c '/root/titan_free_space.sh' >> /var/log/titan.log 2>&1" && (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
 
+# Update node
+
+    cd $HOME && wget -O update_titan.sh https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Titan/update.sh && chmod +x update_titan.sh && ./update_titan.sh
+    
