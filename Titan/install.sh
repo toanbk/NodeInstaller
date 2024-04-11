@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-VERSION="0.1.15"
+VERSION="0.1.16"
 BINARY_NAME="titand"
 RPC_URL="https://test-locator.titannet.io:5000/rpc/v0"
 BINDING_URL="https://api-test1.container1.titannet.io/api/v2/device/binding"

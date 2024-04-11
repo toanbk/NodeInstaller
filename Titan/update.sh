@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-VERSION="0.1.15"
+VERSION="0.1.16"
 BINARY_NAME="titand"
 
 echo -e "\e[1m\e[32m2. Update Node --> \e[0m" && sleep 1
