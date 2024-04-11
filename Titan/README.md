@@ -74,5 +74,5 @@ start since the second. time：
 
 # Update node
 
-    cd $HOME && wget -O update_titan.sh https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Titan/update.sh && chmod +x update_titan.sh && ./update_titan.sh
+    cd $HOME && rm -rf update_titan.sh && wget -O update_titan.sh https://raw.githubusercontent.com/toanbk/NodeInstaller/main/Titan/update.sh && chmod +x update_titan.sh && ./update_titan.sh
     
