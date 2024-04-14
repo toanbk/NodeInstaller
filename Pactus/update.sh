@@ -14,12 +14,13 @@ else
     platform="unknown"
 fi
 
+DIRECTORY_NAME="pactus-cli_${VERSION}"
 FILE_NAME="pactus-cli_${VERSION}_linux_${platform}"
 
 sudo wget https://github.com/pactus-project/pactus/releases/download/v${VERSION}/${FILE_NAME}.tar.gz
 sudo tar -xvzf ${FILE_NAME}.tar.gz && rm -rf ${FILE_NAME}.tar.gz
-sudo chmod +x ${FILE_NAME}/*
-sudo cp -rf ${FILE_NAME}/* node_pactus/
-sudo rm -rf pactus-cli_${VERSION}*
+sudo chmod +x ${DIRECTORY_NAME}/*
+sudo cp -rf ${DIRECTORY_NAME}/* node_pactus/
+sudo rm -rf ${DIRECTORY_NAME}
 
 echo -e "\n=============== UPDATE FINISHED ===================\n"
