@@ -80,6 +80,7 @@ WantedBy=default.target
 EOF
 
 sudo systemctl daemon-reload
+sudo systemctl enable penumbra.service && sudo systemctl enable cometbft.service
 sudo systemctl restart penumbra cometbft
 
 sudo journalctl -af -u penumbra -u cometbft
