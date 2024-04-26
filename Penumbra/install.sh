@@ -32,6 +32,7 @@ cd $HOME
 mkdir cometbft_0.37.5
 cd cometbft_0.37.5
 wget https://github.com/cometbft/cometbft/releases/download/v0.37.5/cometbft_0.37.5_linux_amd64.tar.gz
+sudo tar -xvzf cometbft_0.37.5_linux_amd64.tar.gz
 mv cometbft /usr/local/bin/
 chmod +x /usr/local/bin/cometbft
 cometbft version
