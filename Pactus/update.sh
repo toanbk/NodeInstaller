@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-VERSION="1.1.4"
+VERSION="1.1.5"
 
 echo -e "\e[1m\e[32m2. Update Node --> \e[0m" && sleep 1
 
