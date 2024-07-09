@@ -102,8 +102,6 @@ else
     echo -e "\nConfiguration file updated successfully.\n"
 fi
 
-sudo systemctl restart hedged && sudo journalctl -u hedged -f --no-hostname -o cat
-
 source $HOME/.bash_profile
 sudo tee /etc/systemd/system/hedged.service > /dev/null <<EOF
 [Unit]
@@ -123,8 +121,7 @@ curl https://rpc-hedge-testnet.trusted-point.com/latest_snapshot.tar.lz4 | lz4 -
 
 sudo systemctl daemon-reload
 sudo systemctl enable hedged
-sudo systemctl restart hedged
-journalctl -fu hedged -o cat
+sudo systemctl restart hedged && sudo journalctl -u hedged -f --no-hostname -o cat
 
 echo "===================Install Success==================="
 
