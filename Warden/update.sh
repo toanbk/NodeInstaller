@@ -63,7 +63,7 @@ sed -i \
 wardend tendermint unsafe-reset-all --home $HOME/.warden
 
 # Download latest chain data snapshot
-curl "http://188.245.45.171/wardenprotocol-testnet_latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.warden"
+curl https://server-4.itrocket.net/testnet/warden/warden_2024-08-06_1575684_snap.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.warden
 
 # Create a service
 sudo tee /etc/systemd/system/wardend.service > /dev/null << EOF
