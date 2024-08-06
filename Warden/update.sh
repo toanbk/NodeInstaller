@@ -9,11 +9,14 @@ clear
 # free -mh
 
 # Download binary
-cd && wget https://github.com/warden-protocol/wardenprotocol/releases/download/v0.3.2/wardend_Linux_x86_64.zip
+rm -rf download && mkdir download
+cd download && wget https://github.com/warden-protocol/wardenprotocol/releases/download/v0.3.2/wardend_Linux_x86_64.zip
 unzip wardend_Linux_x86_64.zip
 rm -rf wardend_Linux_x86_64.zip
 chmod +x wardend
 sudo mv wardend $(which wardend)
+
+cd $HOME
 
 # Set node CLI configuration
 wardend config set client chain-id buenavista-1
