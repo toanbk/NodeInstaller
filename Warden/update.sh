@@ -4,14 +4,11 @@ clear
 sudo systemctl stop wardend.service
 
 # set swap ram
-sudo swapoff -a
-sudo fallocate -l 24G /swapfile 
-sudo chmod 600 /swapfile 
-sudo mkswap /swapfile 
-sudo swapon /swapfile 
-free -mh
+# sudo swapoff -a && sudo fallocate -l 24G /swapfile 
+# sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile 
+# free -mh
 
-sudo sysctl vm.swappiness=10
+# sudo sysctl vm.swappiness=10
 
 
 # Download binary
