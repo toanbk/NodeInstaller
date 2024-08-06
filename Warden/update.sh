@@ -1,6 +1,8 @@
 #!/bin/bash
 clear
 
+sudo systemctl stop wardend.service
+
 # set swap ram
 sudo swapoff -a
 sudo fallocate -l 24G /swapfile 
