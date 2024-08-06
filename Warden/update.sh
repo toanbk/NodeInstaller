@@ -2,11 +2,15 @@
 clear
 
 # set swap ram
-# sudo fallocate -l 24G /swapfile 
-# sudo chmod 600 /swapfile 
-# sudo mkswap /swapfile 
-# sudo swapon /swapfile 
-# free -mh
+sudo swapoff -a
+sudo fallocate -l 24G /swapfile 
+sudo chmod 600 /swapfile 
+sudo mkswap /swapfile 
+sudo swapon /swapfile 
+free -mh
+
+sudo sysctl vm.swappiness=10
+
 
 # Download binary
 rm -rf download && mkdir download
@@ -59,7 +63,7 @@ sed -i \
 wardend tendermint unsafe-reset-all --home $HOME/.warden
 
 # Download latest chain data snapshot
-curl "https://snapshots-testnet.nodejumper.io/wardenprotocol-testnet/wardenprotocol-testnet_latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.warden"
+curl "http://188.245.45.171/wardenprotocol-testnet_latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.warden"
 
 # Create a service
 sudo tee /etc/systemd/system/wardend.service > /dev/null << EOF
