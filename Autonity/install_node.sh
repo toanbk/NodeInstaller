@@ -1,6 +1,6 @@
 #!/bin/bash
 
-AUT_VERSION="0.14.0"
+AUT_VERSION="0.14.1"
 ORACLE_VERSION="0.1.9"
 
 NETWORK_NAME="piccadilly"
