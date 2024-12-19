@@ -117,7 +117,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 
-curl http://65.21.155.128/snapshort-hedge-2762845.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.hedge
+curl https://rpc-hedge-testnet.trusted-point.com/latest_snapshot.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.hedge
 
 sudo systemctl daemon-reload
 sudo systemctl enable hedged
